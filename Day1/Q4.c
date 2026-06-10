@@ -1,21 +1,31 @@
 
-//WRITE a program to calculate sum of first N natural numbers.
+//Write a program to count digits in a number
 
-#include<stdio.h>
-int main()
-{
-    int n, i, sum;
-    sum=0;
-    printf("enter the natural number:");
-    scanf("%d",&n);
+#include <stdio.h>
 
-    for(i=1;i<=n;i++)
-    {
-        sum=sum+i;
+int main() {
+    long long num;
+    int count = 0;
+
+    printf("Enter an integer: ");
+    scanf("%lld", &num);
+
+    long long originalNum = num;
+
+    if (num == 0) {
+        count = 1;
+    } else {
+        if (num < 0) {
+            num = -num;
+        }
+
+        while (num > 0) {
+            num /= 10; 
+            count++;   
+        }
     }
 
-    printf("the sum is:%d\n", sum);
+    printf("The number of digits in %lld is: %d\n", originalNum, count);
 
     return 0;
-
 }

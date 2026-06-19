@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int main() {
+    int arr1[] = {10, 20, 30, 40, 50, 30};
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
+
+    int arr2[] = {30, 50, 60, 70, 30, 80};
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    int i, j, k;
+
+    printf("Common elements: ");
+
+    // Loop through each element of the first array
+    for (i = 0; i < n1; i++) {
+        // Check if the current element was already checked before to avoid duplicates
+        int isDuplicate = 0;
+        for (k = 0; k < i; k++) {
+            if (arr1[i] == arr1[k]) {
+                isDuplicate = 1;
+                break;
+            }
+        }
+
+        // If it's not a duplicate, look for it in the second array
+        if (!isDuplicate) {
+            for (j = 0; j < n2; j++) {
+                if (arr1[i] == arr2[j]) {
+                    printf("%d ", arr1[i]);
+                    break; // Match found, move to the next element in arr1
+                }
+            }
+        }
+    }
+    printf("\n");
+
+    return 0;
+}

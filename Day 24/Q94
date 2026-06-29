@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int i = 0, count;
+
+    scanf("%s", str);
+
+    while (str[i] != '\0') {
+        count = 1;
+
+        while (str[i] == str[i + count])
+            count++;
+
+        printf("%c%d", str[i], count);
+
+        i += count;
+    }
+
+    return 0;
+}

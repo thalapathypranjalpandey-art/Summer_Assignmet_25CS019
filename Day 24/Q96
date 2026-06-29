@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    char str[100], result[100];
+    int i = 0, j = 0, k, found;
+
+    scanf("%s", str);
+
+    while (str[i] != '\0') {
+        found = 0;
+
+        for (k = 0; k < j; k++) {
+            if (str[i] == result[k]) {
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found)
+            result[j++] = str[i];
+
+        i++;
+    }
+
+    result[j] = '\0';
+
+    printf("%s", result);
+
+    return 0;
+}

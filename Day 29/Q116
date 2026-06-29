@@ -1,0 +1,135 @@
+#include <stdio.h>
+
+struct Product {
+    int id;
+    char name[50];
+    int quantity;
+    float price;
+};
+
+int main() {
+    struct Product p[100];
+    int n, i, choice;
+
+    printf("Enter number of products: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter product id: ");
+        scanf("%d", &p[i].id);
+
+        printf("Enter product name: ");
+        scanf("%s", p[i].name);
+
+        printf("Enter quantity: ");
+        scanf("%d", &p[i].quantity);
+
+        printf("Enter price: ");
+        scanf("%f", &p[i].price);
+    }
+
+    do {
+        printf("\n1. Display Products");
+        printf("\n2. Add Stock");
+        printf("\n3. Sell Product");
+        printf("\n4. Search Product");
+        printf("\n5. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nID: %d", p[i].id);
+                    printf("\nName: %s", p[i].name);
+                    printf("\nQuantity: %d", p[i].quantity);
+                    printf("\nPrice: %.2f\n", p[i].price);
+                }
+                break;
+
+            case 2:
+                {
+                    int id, qty, found = 0;
+
+                    printf("Enter product id: ");
+                    scanf("%d", &id);
+
+                    printf("Enter quantity to add: ");
+                    scanf("%d", &qty);
+
+                    for (i = 0; i < n; i++) {
+                        if (p[i].id == id) {
+                            p[i].quantity += qty;
+                            printf("Stock updated");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Product not found");
+                }
+                break;
+
+            case 3:
+                {
+                    int id, qty, found = 0;
+
+                    printf("Enter product id: ");
+                    scanf("%d", &id);
+
+                    printf("Enter quantity to sell: ");
+                    scanf("%d", &qty);
+
+                    for (i = 0; i < n; i++) {
+                        if (p[i].id == id) {
+                            if (qty <= p[i].quantity) {
+                                p[i].quantity -= qty;
+                                printf("Product sold");
+                            } else {
+                                printf("Insufficient stock");
+                            }
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Product not found");
+                }
+                break;
+
+            case 4:
+                {
+                    int id, found = 0;
+
+                    printf("Enter product id: ");
+                    scanf("%d", &id);
+
+                    for (i = 0; i < n; i++) {
+                        if (p[i].id == id) {
+                            printf("\nName: %s", p[i].name);
+                            printf("\nQuantity: %d", p[i].quantity);
+                            printf("\nPrice: %.2f", p[i].price);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Product not found");
+                }
+                break;
+
+            case 5:
+                printf("Exit");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}

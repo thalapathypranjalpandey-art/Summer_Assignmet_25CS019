@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Contact {
+    char name[50];
+    char phone[20];
+};
+
+int main() {
+    struct Contact c[100];
+    int n, i, choice;
+
+    printf("Enter number of contacts: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter name: ");
+        scanf("%s", c[i].name);
+
+        printf("Enter phone number: ");
+        scanf("%s", c[i].phone);
+    }
+
+    do {
+        printf("\n1. Display Contacts");
+        printf("\n2. Search Contact");
+        printf("\n3. Update Contact");
+        printf("\n4. Delete Contact");
+        printf("\n5. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nName: %s", c[i].name);
+                    printf("\nPhone: %s\n", c[i].phone);
+                }
+                break;
+
+            case 2:
+                {
+                    char name[50];
+                    int found = 0;
+
+                    printf("Enter name to search: ");
+                    scanf("%s", name);
+
+                    for (i = 0; i < n; i++) {
+                        if (strcmp(c[i].name, name) == 0) {
+                            printf("Name: %s\nPhone: %s", c[i].name, c[i].phone);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Contact not found");
+                }
+                break;
+
+            case 3:
+                {
+                    char name[50];
+                    int found = 0;
+
+                    printf("Enter name to update: ");
+                    scanf("%s", name);
+
+                    for (i = 0; i < n; i++) {
+                        if (strcmp(c[i].name, name) == 0) {
+                            printf("Enter new phone number: ");
+                            scanf("%s", c[i].phone);
+                            printf("Contact updated");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Contact not found");
+                }
+                break;
+
+            case 4:
+                {
+                    char name[50];
+                    int found = 0;
+
+                    printf("Enter name to delete: ");
+                    scanf("%s", name);
+
+                    for (i = 0; i < n; i++) {
+                        if (strcmp(c[i].name, name) == 0) {
+                            for (; i < n - 1; i++)
+                                c[i] = c[i + 1];
+
+                            n--;
+                            printf("Contact deleted");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Contact not found");
+                }
+                break;
+
+            case 5:
+                printf("Exit");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}

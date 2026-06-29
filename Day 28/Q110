@@ -1,0 +1,126 @@
+#include <stdio.h>
+
+struct Account {
+    int accNo;
+    char name[50];
+    float balance;
+};
+
+int main() {
+    struct Account a[100];
+    int n, i, choice;
+
+    printf("Enter number of accounts: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter account number: ");
+        scanf("%d", &a[i].accNo);
+
+        printf("Enter name: ");
+        scanf("%s", a[i].name);
+
+        printf("Enter balance: ");
+        scanf("%f", &a[i].balance);
+    }
+
+    do {
+        printf("\n1. Display Accounts");
+        printf("\n2. Deposit");
+        printf("\n3. Withdraw");
+        printf("\n4. Check Balance");
+        printf("\n5. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nAccount No: %d", a[i].accNo);
+                    printf("\nName: %s", a[i].name);
+                    printf("\nBalance: %.2f\n", a[i].balance);
+                }
+                break;
+
+            case 2:
+                {
+                    int acc;
+                    float amount;
+                    int found = 0;
+
+                    scanf("%d", &acc);
+                    scanf("%f", &amount);
+
+                    for (i = 0; i < n; i++) {
+                        if (a[i].accNo == acc) {
+                            a[i].balance += amount;
+                            printf("Deposit successful");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Account not found");
+                }
+                break;
+
+            case 3:
+                {
+                    int acc;
+                    float amount;
+                    int found = 0;
+
+                    scanf("%d", &acc);
+                    scanf("%f", &amount);
+
+                    for (i = 0; i < n; i++) {
+                        if (a[i].accNo == acc) {
+                            if (amount <= a[i].balance) {
+                                a[i].balance -= amount;
+                                printf("Withdrawal successful");
+                            } else {
+                                printf("Insufficient balance");
+                            }
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Account not found");
+                }
+                break;
+
+            case 4:
+                {
+                    int acc;
+                    int found = 0;
+
+                    scanf("%d", &acc);
+
+                    for (i = 0; i < n; i++) {
+                        if (a[i].accNo == acc) {
+                            printf("Balance: %.2f", a[i].balance);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Account not found");
+                }
+                break;
+
+            case 5:
+                printf("Thank you");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}

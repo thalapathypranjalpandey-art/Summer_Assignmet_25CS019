@@ -1,0 +1,89 @@
+#include <stdio.h>
+
+struct Ticket {
+    int id;
+    char name[50];
+    int seat;
+};
+
+int main() {
+    struct Ticket t[100];
+    int n, i, choice, count = 0;
+
+    printf("Enter total seats: ");
+    scanf("%d", &n);
+
+    do {
+        printf("\n1. Book Ticket");
+        printf("\n2. Display Tickets");
+        printf("\n3. Cancel Ticket");
+        printf("\n4. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                if (count < n) {
+                    t[count].id = count + 1;
+
+                    printf("Enter passenger name: ");
+                    scanf("%s", t[count].name);
+
+                    printf("Enter seat number: ");
+                    scanf("%d", &t[count].seat);
+
+                    count++;
+                    printf("Ticket booked successfully");
+                } else {
+                    printf("No seats available");
+                }
+                break;
+
+            case 2:
+                if (count == 0) {
+                    printf("No bookings found");
+                } else {
+                    for (i = 0; i < count; i++) {
+                        printf("\nTicket ID: %d", t[i].id);
+                        printf("\nName: %s", t[i].name);
+                        printf("\nSeat No: %d\n", t[i].seat);
+                    }
+                }
+                break;
+
+            case 3:
+                {
+                    int id, found = 0;
+
+                    printf("Enter ticket ID to cancel: ");
+                    scanf("%d", &id);
+
+                    for (i = 0; i < count; i++) {
+                        if (t[i].id == id) {
+                            for (; i < count - 1; i++)
+                                t[i] = t[i + 1];
+
+                            count--;
+                            printf("Ticket cancelled");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Ticket not found");
+                }
+                break;
+
+            case 4:
+                printf("Thank you");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}

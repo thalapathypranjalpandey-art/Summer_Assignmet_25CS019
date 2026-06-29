@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+struct Student {
+    int roll;
+    char name[50];
+    float marks;
+};
+
+int main() {
+    struct Student s[100];
+    int n, i, choice;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter roll number: ");
+        scanf("%d", &s[i].roll);
+
+        printf("Enter name: ");
+        scanf("%s", s[i].name);
+
+        printf("Enter marks: ");
+        scanf("%f", &s[i].marks);
+    }
+
+    do {
+        printf("\n1. Display Records");
+        printf("\n2. Search Student");
+        printf("\n3. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nRoll: %d", s[i].roll);
+                    printf("\nName: %s", s[i].name);
+                    printf("\nMarks: %.2f\n", s[i].marks);
+                }
+                break;
+
+            case 2:
+                {
+                    int roll, found = 0;
+                    printf("Enter roll number to search: ");
+                    scanf("%d", &roll);
+
+                    for (i = 0; i < n; i++) {
+                        if (s[i].roll == roll) {
+                            printf("Roll: %d\n", s[i].roll);
+                            printf("Name: %s\n", s[i].name);
+                            printf("Marks: %.2f\n", s[i].marks);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Student not found");
+                }
+                break;
+
+            case 3:
+                printf("Exit");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 3);
+
+    return 0;
+}

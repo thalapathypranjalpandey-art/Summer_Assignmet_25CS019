@@ -1,0 +1,89 @@
+#include <stdio.h>
+
+struct Employee {
+    int id;
+    char name[50];
+    float salary;
+};
+
+int main() {
+    struct Employee e[100];
+    int n, i, choice;
+
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        scanf("%d", &e[i].id);
+        scanf("%s", e[i].name);
+        scanf("%f", &e[i].salary);
+    }
+
+    do {
+        printf("\n1. Display Salary");
+        printf("\n2. Search Employee");
+        printf("\n3. Update Salary");
+        printf("\n4. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nID: %d", e[i].id);
+                    printf("\nName: %s", e[i].name);
+                    printf("\nSalary: %.2f\n", e[i].salary);
+                }
+                break;
+
+            case 2:
+                {
+                    int id, found = 0;
+                    scanf("%d", &id);
+
+                    for (i = 0; i < n; i++) {
+                        if (e[i].id == id) {
+                            printf("%d %s %.2f", e[i].id, e[i].name, e[i].salary);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Employee not found");
+                }
+                break;
+
+            case 3:
+                {
+                    int id, found = 0;
+                    float newSalary;
+
+                    scanf("%d", &id);
+
+                    for (i = 0; i < n; i++) {
+                        if (e[i].id == id) {
+                            scanf("%f", &newSalary);
+                            e[i].salary = newSalary;
+                            printf("Salary updated");
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Employee not found");
+                }
+                break;
+
+            case 4:
+                printf("Exit");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}

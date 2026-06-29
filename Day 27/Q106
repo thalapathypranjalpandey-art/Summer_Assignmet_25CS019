@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+struct Employee {
+    int id;
+    char name[50];
+    float salary;
+};
+
+int main() {
+    struct Employee e[100];
+    int n, i, choice;
+
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter employee id: ");
+        scanf("%d", &e[i].id);
+
+        printf("Enter employee name: ");
+        scanf("%s", e[i].name);
+
+        printf("Enter salary: ");
+        scanf("%f", &e[i].salary);
+    }
+
+    do {
+        printf("\n1. Display Employees");
+        printf("\n2. Search Employee");
+        printf("\n3. Exit\n");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                for (i = 0; i < n; i++) {
+                    printf("\nID: %d", e[i].id);
+                    printf("\nName: %s", e[i].name);
+                    printf("\nSalary: %.2f\n", e[i].salary);
+                }
+                break;
+
+            case 2:
+                {
+                    int id, found = 0;
+
+                    printf("Enter employee id: ");
+                    scanf("%d", &id);
+
+                    for (i = 0; i < n; i++) {
+                        if (e[i].id == id) {
+                            printf("\nID: %d", e[i].id);
+                            printf("\nName: %s", e[i].name);
+                            printf("\nSalary: %.2f\n", e[i].salary);
+                            found = 1;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        printf("Employee not found");
+                }
+                break;
+
+            case 3:
+                printf("Exit");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while (choice != 3);
+
+    return 0;
+}
